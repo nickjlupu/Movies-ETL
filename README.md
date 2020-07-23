@@ -3,10 +3,12 @@
 # Week 8 Challenge
 
 ## Background
-In this challenge, you will write a Python script that performs all three ETL steps on the Wikipedia and Kaggle data.
+This week's modules went through the ETL process to prepare for a hackathon for a fictitious streaming service, Amazing Prime.  Data was provided in the form of 2 .csv files (Kaggle & ratings data) & 1 .json file (Wiki data).  Data is gathered from both Wikipedia and Kaggle, combined, and saved into a SQL database so that the hackathon participants have a nice, clean dataset to use. 
+
+In this challenge, a Python script was written that performs all three ETL steps on the Wikipedia and Kaggle data.
 
 ### Objectives
-The goals of this challenge are for you to:
+The goals of this challenge are to:
 
 * Create an automated ETL pipeline.
 * Extract data from multiple sources.
@@ -19,7 +21,7 @@ Jupyter Notebook
 VS Code
 PostgreSQL 11
 pgAdmin4
-
+Data:  2 .csv files (Kaggle & ratings data) & 1 .json file (Wiki data)
 
 ## Assumptions
 1. Future data to run the automated ETL will be provided in the same format .  This includes filenames, file types (2 csv's and 1 json file, no API call), and datatypes inside these files.<br>
@@ -32,4 +34,4 @@ pgAdmin4
 
 ### **Fig.1**<br>
 
-![](images/Fig1.png) 
+![](images/Fig1.PNG) 
