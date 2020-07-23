@@ -6,7 +6,7 @@
 This week's modules went through the ETL process to prepare for a hackathon for a fictitious streaming service, Amazing Prime.  Data was provided in the form of 2 .csv files (Kaggle & ratings data) & 1 .json file (Wiki data).  Data is gathered from both Wikipedia and Kaggle, combined, and saved into a SQL database so that the hackathon participants have a nice, clean dataset to use. 
 
 In this challenge, a Python script was written that performs all three ETL steps on the Wikipedia and Kaggle data.
-[Challenge.py](challenge.py)
+[challenge.py](challenge.py)
 
 ### Objectives
 The goals of this challenge are to:
@@ -21,7 +21,7 @@ The goals of this challenge are to:
 * Jupyter Notebook
 * VS Code
 * PostgreSQL 11
-* pgAdmin4
+* pgAdmin 4
 * Data:  2 .csv files (Kaggle & ratings data) & 1 .json file (Wiki data)
 
 ## Assumptions
