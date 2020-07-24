@@ -309,20 +309,20 @@ def automate_etl (wiki_movies_raw,kaggle_metadata,ratings):
     except:
         print('Loading movies df to SQL table failed, investigate')
     
-    # # load ratings data to sql table
-    # rows_imported = 0
-    # # get the start_time from time.time()
-    # try:
-    #     start_time = time.time()    
-    #     for data in pd.read_csv(f'{file_dir}ratings.csv', chunksize=1000000):
-    #         print(f'importing rows {rows_imported} to {rows_imported + len(data)}...', end='')
-    #         data.to_sql(name='ratings', con=engine, if_exists='append')
-    #         rows_imported += len(data)
+    # load ratings data to sql table
+    rows_imported = 0
+    # get the start_time from time.time()
+    try:
+        start_time = time.time()    
+        for data in pd.read_csv(f'{file_dir}ratings.csv', chunksize=1000000):
+            print(f'importing rows {rows_imported} to {rows_imported + len(data)}...', end='')
+            data.to_sql(name='ratings', con=engine, if_exists='append')
+            rows_imported += len(data)
 
-    #         # add elapsed time to final print out
-    #         print(f'Done. {time.time() - start_time} total seconds elapsed')
-    # except:
-    #     print('Loading ratings to SQL table failed, consider reducing chunk size')
+            # add elapsed time to final print out
+            print(f'Done. {time.time() - start_time} total seconds elapsed')
+    except:
+        print('Loading ratings to SQL table failed, consider reducing chunk size')
 
 # ========================
 # CALL AUTOMATED FUNCTION
