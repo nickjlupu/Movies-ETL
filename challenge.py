@@ -133,7 +133,7 @@ def automate_etl (wiki_movies_raw,kaggle_metadata,ratings):
         if re.match(r'\$\s*\d+\.?\d*\s*milli?on', s, flags=re.IGNORECASE):
 
             # remove dollar sign and " million"
-            s = re.sub('\$|\s|[a-zA-Z]','', s)
+            s = re.sub(r'\$|\s|[a-zA-Z]','', s)
 
             # convert to float and multiply by a million
             value = float(s) * 10**6
@@ -145,7 +145,7 @@ def automate_etl (wiki_movies_raw,kaggle_metadata,ratings):
         elif re.match(r'\$\s*\d+\.?\d*\s*billi?on', s, flags=re.IGNORECASE):
 
             # remove dollar sign and " billion"
-            s = re.sub('\$|\s|[a-zA-Z]','', s)
+            s = re.sub(r'\$|\s|[a-zA-Z]','', s)
 
             # convert to float and multiply by a billion
             value = float(s) * 10**9
@@ -157,7 +157,7 @@ def automate_etl (wiki_movies_raw,kaggle_metadata,ratings):
         elif re.match(r'\$\s*\d{1,3}(?:[,\.]\d{3})+(?!\s[mb]illion)', s, flags=re.IGNORECASE):
 
             # remove dollar sign and commas
-            s = re.sub('\$|,','', s)
+            s = re.sub(r'\$|,','', s)
 
             # convert to float
             value = float(s)
@@ -304,19 +304,25 @@ def automate_etl (wiki_movies_raw,kaggle_metadata,ratings):
     engine.execute(query1,query2)
 
     # load movies df to sql table
-    movies_df.to_sql(name='movies', con=engine, if_exists='replace')
-
+    try:
+        movies_df.to_sql(name='movies', con=engine, if_exists='replace')
+    except:
+        print('Loading movies df to SQL table failed, investigate')
+    
     # # load ratings data to sql table
     # rows_imported = 0
     # # get the start_time from time.time()
-    # start_time = time.time()
-    # for data in pd.read_csv(f'{file_dir}ratings.csv', chunksize=1000000):
-    #     print(f'importing rows {rows_imported} to {rows_imported + len(data)}...', end='')
-    #     data.to_sql(name='ratings', con=engine, if_exists='append')
-    #     rows_imported += len(data)
+    # try:
+    #     start_time = time.time()    
+    #     for data in pd.read_csv(f'{file_dir}ratings.csv', chunksize=1000000):
+    #         print(f'importing rows {rows_imported} to {rows_imported + len(data)}...', end='')
+    #         data.to_sql(name='ratings', con=engine, if_exists='append')
+    #         rows_imported += len(data)
 
-    #     # add elapsed time to final print out
-    #     print(f'Done. {time.time() - start_time} total seconds elapsed')
+    #         # add elapsed time to final print out
+    #         print(f'Done. {time.time() - start_time} total seconds elapsed')
+    # except:
+    #     print('Loading ratings to SQL table failed, consider reducing chunk size')
 
 # ========================
 # CALL AUTOMATED FUNCTION
